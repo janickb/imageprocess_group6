@@ -30,7 +30,7 @@ imshow(high_pass_img, []);
 title('High Pass Filtered Image');
 
 % 2. low frequency pass filter
-% here we create the low pass gaussian filter
+% here we creat the low pass gaussian filter
 lp_filter = fspecial('gaussian', [gaussian_filter_size gaussian_filter_size], gaussian_filter_sigma); % size of the filter is [15, 15], 5 is standard deviation, the bigger the size and deviation, the smoother,
 low_pass_img = imfilter(image_data, lp_filter, 'replicate');
 
