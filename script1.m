@@ -4,9 +4,9 @@ close all;
 
 %Parameters
 laplace_filter_factor = 0.5;
-gaussian_filter_sigma = 3;
+gaussian_filter_sigma = 5;
 gaussian_filter_size = 15;
-cut_off_frequency = 30;
+cut_off_frequency = 36;
 
 % get one slice of the dicom file
 dicom_file = 'SubjectB_T1_DICOM\IMG0069.dcm'; % choose one slice of the dicom file
@@ -51,12 +51,6 @@ title('Image with Gaussian Noise');
 % transform to frequency domain
 noisy_img_fft = fftshift(fft2(noisy_img));% move the low frequency to the center, and high frequency will be in the boundary
 
-% magnitude_spectrum = abs(noisy_img_fft);
-% magnitude_spectrum = log(1 + magnitude_spectrum);  % enhance the result
-% figure;
-% imshow(magnitude_spectrum, []);  % show the magnitude_spectrum
-% title('Magnitude Spectrum');
-
 % design a low pass filter to denoise
 [rows, cols] = size(noisy_img);
 [u, v] = meshgrid(-floor(cols/2):floor((cols-1)/2), -floor(rows/2):floor((rows-1)/2));% creat the 2d matrix to store the location of all points in graph
@@ -79,6 +73,4 @@ title('Filtered Image after Noise Reduction');
 figure;
 imshow(low_pass_filter, []);
 title('Gaussian Low Pass Filter');
-%xlabel('Frequency (u)');
-%ylabel('Frequency (v)');
 colorbar;
