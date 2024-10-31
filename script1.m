@@ -21,7 +21,7 @@ title('Original Image');
 % 1. high frequency pass filter
 % here we create the high pass laplace filter
 hp_filter = fspecial('laplacian', laplace_filter_factor); % laplace high pass filter, 0.5 is the operator, the higher, the edge of the target in image is sharper
-high_pass_img = imfilter(image_data, hp_filter, 'replicate'); % apply the dilter to the image. replicate is to copy the value of boundary pixels while convolution
+high_pass_img = imfilter(image_data, hp_filter, 'replicate', 'conv'); % apply the dilter to the image. replicate is to copy the value of boundary pixels while convolution
 
 % show the high pass filtered image
 figure;
@@ -32,7 +32,7 @@ title('High Pass Filtered Image');
 % 2. low frequency pass filter
 % here we create the low pass gaussian filter
 lp_filter = fspecial('gaussian', [gaussian_filter_size gaussian_filter_size], gaussian_filter_sigma); % size of the filter is [15, 15], 5 is standard deviation, the bigger the size and deviation, the smoother,
-low_pass_img = imfilter(image_data, lp_filter, 'replicate');
+low_pass_img = imfilter(image_data, lp_filter, 'replicate', 'conv');
 
 % show low pass filter result
 subplot(2,2,2);
